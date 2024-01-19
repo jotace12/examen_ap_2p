@@ -1,0 +1,44 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="provedor" (ngSubmit)="grabar()">
+      <div class="mb-2">
+        <label for="nombre">nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" />
+        @if (provedor.invalid && (provedor.dirty || provedor.touched)) {
+        <div class="alert">
+          @if (provedor.errors?.["required"]) {
+          <div class="ng-invalid">nombre es requerido</div>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-2">
+        <label for="descripcion">descripcion</label>
+        <input type="text" class="form-control" formControlName="descripcion" />
+        @if (provedor.invalid && (provedor.dirty || provedor.touched)) {
+        <div class="alert">
+          @if (provedor.errors?.["required"]) {
+          <div class="ng-invalid">descripcion es requerido</div>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!provedor.valid"
+        >
+          Grabar
+        </button>
+        <button class="btn btn-secondary" routerLink="/proveedores">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

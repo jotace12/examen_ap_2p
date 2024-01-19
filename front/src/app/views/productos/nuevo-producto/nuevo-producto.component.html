@@ -1,0 +1,76 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+  </div>
+  <!--form-->
+  <div class="card-body">
+    <form [formGroup]="producto" (ngSubmit)="grabar()">
+      <div class="mb-2">
+        <label for="id_categorias">id_categorias</label>
+        <select class="form-control" formControlName="id_categorias">
+          <option value="0">Seleccione una opción</option>
+          @for (proveedor of ListaProveedores; track proveedor.id_categorias) {
+          <option [value]="proveedor.id_categorias">{{ proveedor.nombre }}</option>
+          }
+        </select>
+
+        @if (producto.invalid && (producto.dirty || producto.touched)) {
+        <div class="alert">
+          @if (producto.errors?.["required"]) {
+          <div class="ng-invalid">Id Proovedor es requerido</div>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-2">
+        <label for="nombre"> nombre </label>
+        <input type="text" class="form-control" formControlName="nombre" />
+        @if (producto.invalid && (producto.dirty || producto.touched)) {
+        <div class="alert">
+          @if (producto.errors?.["required"]) {
+          <div class="ng-invalid">nombre es requerido</div>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-2">
+        <label for="precio"> precio </label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="precio"
+        />
+        @if (producto.invalid && (producto.dirty || producto.touched)) {
+        <div class="alert">
+          @if (producto.errors?.["required"]) {
+          <div class="ng-invalid">Precio es requerido</div>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-2">
+        <label for="stock"> stock </label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="stock"
+        />
+        @if (producto.invalid && (producto.dirty || producto.touched)) {
+        <div class="alert">
+          @if (producto.errors?.["required"]) {
+          <div class="ng-invalid">stock es requerido</div>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-2">
+        <button type="submit" class="btn btn-primary" [disabled]="!producto.valid">
+          Grabar
+        </button>
+        <button class="btn btn-secondary" routerLink="/dashboard/productos">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
